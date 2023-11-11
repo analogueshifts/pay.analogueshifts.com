@@ -7,7 +7,7 @@ export default function FlutterwavePay({ data }) {
     tx_ref: Date.now(),
     amount: data[5].value,
     currency: "USD",
-    payment_options: "card, mobilemoney, ussd",
+    payment_options: "card,mobilemoney,ussd,nqr",
     customer: {
       email: data[1].value,
       phone_number: data[2].value,
