@@ -2,45 +2,48 @@
 import { useState } from "react";
 import Image from "next/image";
 import AnalogueShifts from "@/public/analogueShifts.png";
+import FlutterwavePay from "../Components/FlutterwavePay";
 
 export default function Page({ params }) {
   const [data, setData] = useState([
     {
       id: 1,
-      label: "First Name",
+      label: "Full Name",
       type: "text",
       value: "",
+      fullWidth: true,
     },
     {
       id: 2,
-      label: "Last Name",
-      type: "text",
-      value: "",
-    },
-    {
-      id: 3,
       label: "Email",
       type: "email",
       value: "",
       fullWidth: true,
     },
     {
-      id: 4,
+      id: 3,
       label: "Phone",
       type: "number",
       value: 0,
       fullWidth: true,
     },
     {
+      id: 4,
+      label: "Title",
+      type: "text",
+      value: "Payment",
+      fullWidth: true,
+    },
+    {
       id: 5,
       label: "Description",
       type: "text",
-      value: "",
+      value: "Payment",
       fullWidth: true,
     },
     {
       id: 6,
-      label: "Postal Code",
+      label: "Amount",
       type: "number",
       value: 0,
       fullWidth: true,
@@ -60,6 +63,8 @@ export default function Page({ params }) {
       })
     );
   };
+
+  const amount = data[5].value;
 
   return (
     <main className="w-full flex justify-center pb-10 pt-[100px]">
@@ -116,31 +121,29 @@ export default function Page({ params }) {
             <div className="pt-3 w-full flex flex-col gap-4">
               <div className="w-full flex justify-between items-center">
                 <p className="text-sm text-black/80 font-semibold">Subtotal</p>
-                <p className="text-sm text-black/90 font-bold">$165</p>
+                <p className="text-sm text-black/90 font-bold">${amount}</p>
               </div>
               <div className="w-full flex justify-between items-center">
                 <p className="text-sm text-black/80 font-semibold">Fee</p>
-                <p className="text-sm text-black/90 font-bold">$9</p>
+                <p className="text-sm text-black/90 font-bold">$0</p>
               </div>
               <div className="w-full border-t"></div>
               <div className="w-full flex justify-between items-center">
                 <p className="text-base text-black/80 font-semibold">
                   Total Amount
                 </p>
-                <p className="text-base text-black/90 font-bold">$174</p>
+                <p className="text-base text-black/90 font-bold">${amount}</p>
               </div>
-              <button className="w-full flex justify-center h-10 items-center rounded-md text-white text-sm bg-[#FFC800] hover:bg-[#FFC800]/80">
-                Continue to payment
-              </button>
+              <FlutterwavePay data={data} />
             </div>
           </div>
-          <div className="w-[calc(50%-30px)] relative max-[900px]:w-full max-[900px]:h-[700px]">
+          <div className="w-[calc(50%-30px)] relative max-[900px]:w-full xl:max-[900px]:h-[700px]">
             <Image
               src={AnalogueShifts}
               alt="AnalogueShift's Logo"
               className="w-full h-[90%] max-[900px]:h-full"
             />
-            <div className="absolute bottom-[calc(10%+50px)] max-[900px]:bottom-[50px] left-[15px] w-[calc(100%-30px)] flex justify-between items-center">
+            <div className="absolute bottom-[calc(10%+50px)] max-[900px]:bottom-[30px] left-[15px] w-[calc(100%-30px)] flex justify-between items-center">
               <p className="text-black font-bold text-xl">AnalogueShifts</p>
               <button className="flex justify-center h-9 items-center rounded-md text-[#FFC800] text-sm border hover:scale-110 duration-300 border-[#FFC800] px-10">
                 PAY
