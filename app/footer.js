@@ -35,14 +35,14 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="w-full bg-white flex justify-between items-center h-64 pl-10 pr-[75px] max-[1000px]:px-5 max-[800px]:flex-col max-[800px]:h-auto max-[800px]:py-10 max-[800px]:gap-7">
+    <footer className="w-full bg-white grid xl:flex justify-between items-center gap-16 py-5 pl-10 pr-[75px]">
       <div>
         <p className="text-sm text-black font-bold">PAY AT ANALOGUESHIFTS</p>
         <p className="text-[15px] text-black pt-9 font-medium max-[800px]:pt-4">
           Simplifying Transactions
         </p>
       </div>
-      <div className="flex gap-24 max-[700px]:gap-10 max-[500px]:flex-col">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-24">
         {footerLinks.map((data) => {
           return (
             <div key={Math.random + data.title} className="flex flex-col gap-3">

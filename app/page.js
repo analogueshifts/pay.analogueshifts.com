@@ -7,7 +7,7 @@ export default function Home() {
     {
       title: "Card Payment",
       subTitle: "Ideal for quick transactions and Instant payments.",
-      amount: 9,
+      amount: 0,
       path: "/card-payment",
       perks: [
         "No Hidden Charges",
@@ -22,7 +22,7 @@ export default function Home() {
       amount: 0,
       path: "/net-banking",
       perks: [
-        "Unlimited Transactions",
+        "No Hidden Charges",
         "Instant Confirmation",
         "24/7 Customer Support",
         "Secure Gateway",
@@ -53,9 +53,9 @@ export default function Home() {
         </p>
       </div>
       <div className="w-full bg-transparent h-[500px] px-8 max-[1050px]:h-auto max-[1050px]:py-10">
-        <div className="w-full h-[380px] bg-white rounded pt-12 px-6 gap-y-6 flex flex-wrap justify-between pb-5 max-[1050px]:h-auto">
+        <div className="w-full h-[450px] bg-white rounded pt-12 px-6 gap-y-6 flex flex-wrap justify-between pb-5 max-[1050px]:h-auto">
           {paymentOptions.map((option, index) => (
-            <div key={index} className="min-w-[300px] w-[30%] h-full">
+            <div key={index} className="grid min-w-[300px] w-[30%] h-full p-3 border rounded-md">
               <p className="text-black font-extrabold text-2xl">
                 {option.title}
               </p>
