@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import AnalogueShifts from "@/public/analogueShifts.png";
+import Pay from "@/public/pay.png";
 import FlutterwavePay from "../Components/FlutterwavePay";
 
 export default function Page({ params }) {
@@ -68,7 +68,7 @@ export default function Page({ params }) {
 
   return (
     <main className="w-full flex justify-center pb-10 pt-[100px]">
-      <div className="w-[1000px] max-[1100px]:w-[90%]">
+      <div className="bg-yellow-50 p-2 md:p-9 rounded-md shadow-2xl w-[1100px] max-[1100px]:w-[90%]">
         <p className="text-black font-extrabold text-3xl">Payment details</p>
         <div className="w-full max-[900px]:flex-col pt-10 flex gap-[60px] max-[900px]:gap-[35px]">
           <div className="w-[calc(50%-30px)] flex flex-wrap gap-x-4 gap-y-4 max-[900px]:w-full">
@@ -137,11 +137,11 @@ export default function Page({ params }) {
               <FlutterwavePay data={data} />
             </div>
           </div>
-          <div className="w-[calc(50%-30px)] relative max-[900px]:w-full xl:max-[900px]:h-[700px]">
+          <div className="w-[calc(50%-30px)] relative max-[900px]:w-full xl:max-[900px]:h-[700px] z-0">
             <Image
-              src={AnalogueShifts}
+              src={Pay}
               alt="AnalogueShift's Logo"
-              className="w-full h-[90%] max-[900px]:h-full"
+              className="w-full h-[90%] max-[900px]:h-full object-cover rounded-lg z-0"
             />
             <div className="absolute bottom-[calc(10%+50px)] max-[900px]:bottom-[30px] left-[15px] w-[calc(100%-30px)] flex justify-between items-center">
               <p className="text-black font-bold text-xl">AnalogueShifts</p>

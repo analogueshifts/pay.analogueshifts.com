@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import check from "@/public/Vector.png";
+import Landing from "@/public/landing.png";
 
 export default function Home() {
   const paymentOptions = [
@@ -17,7 +18,7 @@ export default function Home() {
       ],
     },
     {
-      title: "Net Banking",
+      title: "USSD",
       subTitle: "Preferred choice for secure online transactions.",
       amount: 0,
       path: "/net-banking",
@@ -44,7 +45,10 @@ export default function Home() {
 
   return (
     <main className="w-full bg-homeBackgroundColor">
-      <div className="w-full flex h-[380px] bg-transparent flex-col items-center justify-center gap-5">
+      <div className="w-full flex min-h-[500px] bg-transparent flex-col items-center justify-center gap-5">
+        <div>
+          <Image src={Landing} alt="Check Mark" width={200} height={200} />
+        </div>
         <p className="text-black font-extrabold text-4xl text-center max-[500px]:text-2xl">
           Payment Options
         </p>
@@ -52,10 +56,13 @@ export default function Home() {
           Choose from our convenient payment options designed for your ease.
         </p>
       </div>
-      <div className="w-full bg-transparent h-[500px] px-8 max-[1050px]:h-auto max-[1050px]:py-10">
-        <div className="w-full h-[450px] bg-white rounded pt-12 px-6 gap-y-6 flex flex-wrap justify-between pb-5 max-[1050px]:h-auto">
+      <div className="w-full bg-transparent h-[500px] px-3 xl:px-8 max-[1050px]:h-auto max-[1050px]:py-10">
+        <div className="w-full h-[450px] bg-white rounded pt-12 px-3 xl:px-6 gap-y-6 flex flex-wrap justify-between pb-5 max-[1050px]:h-auto">
           {paymentOptions.map((option, index) => (
-            <div key={index} className="grid min-w-[300px] w-[30%] h-full p-3 border rounded-md">
+            <div
+              key={index}
+              className="grid xl:min-w-[300px] h-full p-3 border rounded-md"
+            >
               <p className="text-black font-extrabold text-2xl">
                 {option.title}
               </p>
