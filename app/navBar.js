@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import ApplicationLogo from "./Components/ApplicationLogo";
 export default function NavBar() {
   const [opacity, setOpacity] = useState(1);
   const [transformOne, setTransformOne] = useState(0);
@@ -25,20 +26,16 @@ export default function NavBar() {
     <nav className="w-full">
       <div
         style={{ boxShadow: "1px 1px 50px rgba(0,0,0,0.1)" }}
-        className="w-[calc(100%-12px)] h-[50px] backdrop-filter backdrop-blur-sm top-1.5 left-1.5 fixed rounded-full px-7 flex justify-between items-center"
+        className="w-[calc(100%-12px)] h-16 backdrop-filter backdrop-blur-sm top-1.5 left-1.5 fixed z-50 rounded-full px-7 flex justify-between items-center"
       >
-        <div className="flex gap-4 max-[850px]:hidden">
-          <Link href="#">
-            <p className="text-sm text-black font-semibold">Payment</p>
-          </Link>
-          <Link href="#">
-            <p className="text-sm text-black font-semibold">Options</p>
-          </Link>
-          <Link href="#">
-            <p className="text-sm text-black font-semibold">Support</p>
-          </Link>
+        <div className="flex items-center">
+          {/* Logo */}
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/">
+              <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+            </Link>
+          </div>
         </div>
-        <p className="text-sm text-black font-semibold">ANALOGUESHIFTS</p>
         <div className="flex gap-4 max-[850px]:hidden">
           <Link href="#">
             <p className="text-sm text-black font-semibold">Details</p>
@@ -70,7 +67,7 @@ export default function NavBar() {
       </div>
       <div
         style={{ left: `${position}px` }}
-        className="w-[50%] h-screen static hidden duration-300 max-[850px]:fixed bg-white pt-6 pl-5 max-[850px]:flex flex-col gap-5"
+        className="w-[50%] h-screen static hidden duration-300 max-[850px]:fixed z-50 bg-white pt-6 pl-5 max-[850px]:flex flex-col gap-5"
       >
         <Link href="#">
           <p className="text-sm text-black font-semibold">Payment</p>
