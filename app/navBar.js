@@ -53,7 +53,7 @@ export default function NavBar() {
         <div
           style={{ transform: `rotate(${bodyRotate}deg)` }}
           onClick={toggleMenu}
-          className="hidden max-[850px]:flex duration-300 flex-col w-5 h-3 cursor-pointer justify-between"
+          className="hidden max-[850px]:flex duration-300 origin-left flex-col w-5 h-3 cursor-pointer justify-between"
         >
           <div
             style={{ transform: `rotate(${transformOne}deg)` }}
