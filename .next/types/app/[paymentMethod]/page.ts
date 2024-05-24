@@ -1,4 +1,4 @@
-// File: C:\Users\tesli\Desktop\projects\web\ANALOGUESHIFTS\pay\app\[paymentMethod]\page.js
+// File: C:\Users\tesli\Desktop\projects\web\analogueshifts\pay\app\[paymentMethod]\page.js
 import * as entry from '../../../../app/[paymentMethod]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
