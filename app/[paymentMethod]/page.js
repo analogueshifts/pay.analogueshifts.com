@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Pay from "@/public/pay.png";
-import FlutterwavePay from "../Components/FlutterwavePay";
+import FlutterwavePay from "@/components/application/flutterwave-pay";
 
 export default function Page({ params }) {
   const [data, setData] = useState([
