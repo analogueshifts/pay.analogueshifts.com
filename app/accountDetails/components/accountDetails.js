@@ -19,7 +19,7 @@ export default function GetBankDropdown() {
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await axios.get("https://auth.analogueshifts.com/api/get-token", {
+        const response = await axios.get("https://auth.analogueshifts.com?app=pay", {
           headers: {
             // Include any required headers here
             "Content-Type": "application/json"
