@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import check from "@/public/Vector.png";
+import pay from "@/public/pay.png";
 import Landing from "@/public/landing.png";
+
 
 export default function Home() {
   const paymentOptions = [
@@ -113,8 +115,36 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <div className="w-full bg-transparent h-[500px] px-3 xl:px-8 max-[1050px]:h-auto max-[1050px]:py-10">
+        <div className="grid grid-cols-5">
+          <div className="col-span-3 mt-16">
+            <p className="text-white text-[50px] font-bold">
+              Payments made easy with{" "}
+              <a href="https://www.pay.analogueshifts.com">
+                analogueshifts pay
+              </a>
+            </p>
+            <p className="text-yellow-400 text-[30px] font-semibold capitalize mt-6">
+              enjoy a secure and hassle-free Payment experience with instant
+              confirmation
+            </p>
+            <Link
+              href="/accountDetails" 
+              className={`text-sm text-black tracking-wide bg-yellow-400 hover:bg-[#FAE315] hover:border-none font-semibold w-56 flex justify-center items-left rounded-lg h-11`}
+            >
+              <p className="items-center justify-center border-[#9CA3AF] mt-3 bg-transparent">
+                Proceed to make payment
+              </p>
+            </Link>
+            
+          </div>
+          <div className="col-span-2 mt-0">
+            <Image src={pay} alt="pay" width={["600px"]} height={["600px"]} />
+          </div>
+        </div>
+      </div>
       <div className="w-full h-[450px] bg-white flex justify-center items-center">
-        <div className="w-[960px] max[1000px]:w-[90%] flex flex-col items-center gap-4">
+        <div className="w-[960px] max-[1000px]:w-[90%] flex flex-col items-center gap-4">
           <p className="text-xl font-bold text-black">Our Promise</p>
           <p className="text-black max-[500px]:text-2xl max-[1050px]:text-3xl font-extrabold text-center text-[48px] leading-[61.2px] tracking-[-2%]">
             We are committed to providing a secure and hassle-free payment
