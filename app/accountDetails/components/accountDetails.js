@@ -4,8 +4,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios
 import img from "@/public/woman1.png";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 export default function GetBankDropdown() {
+  const router = useRouter(); // Initialize useRouter
+
   // State to store fetched bank data
   const [banks, setBanks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,27 +16,44 @@ export default function GetBankDropdown() {
   const [accountNumber, setAccountNumber] = useState(''); // State to store account number input
   const [selectedBank, setSelectedBank] = useState(''); // State to store selected bank code
   const [accountName, setAccountName] = useState(''); // State to store verified account name
+  const [token, setToken] = useState(''); // State to store the extracted token
 
-  // Retrieve the token from localStorage
+  // useEffect to extract token from URL when redirected to the app
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem('authToken');
+    const extractTokenFromURL = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenFromURL = urlParams.get('token'); // Extract token from the URL parameter
 
-    if (!tokenFromStorage) {
-      setError("No token found. Please login again."); // Handle the absence of the token
-      setLoading(false); // Stop loading if there's no token
-      return;
+      if (tokenFromURL) {
+        setToken(tokenFromURL); // Store the token in state
+        localStorage.setItem('authToken', tokenFromURL); // Optionally store the token in localStorage for persistence
+      } else {
+        console.error("Token not found in the URL.");
+        setError("Token not found in the URL."); // Set error message in state
+      }
+    };
+
+    // Check if the token is not already set and the URL has the token parameter
+    if (!token) {
+      extractTokenFromURL();
     }
+  }, [token]);
 
-    // Fetch bank data when the token is available
+  // useEffect to fetch bank data when the token is available
+  useEffect(() => {
+    if (!token) return; // Only fetch if the token is available
+
     const fetchBankData = async () => {
       try {
         const response = await axios.get("https://api.analogueshifts.com/api/tool/bank/dropdown", {
           headers: {
-            'Authorization': `Bearer ${tokenFromStorage}`, // Use the token from storage
+            'Authorization': `Bearer ${token}`, // Use the extracted token
           },
         });
 
         console.log("Bank dropdown response:", response); // Log the entire response object
+
+        // Axios automatically parses JSON, so we can directly use response.data
         const data = response.data;
         console.log("Bank data received:", data); // Log the parsed JSON data
         setBanks(data.data.banks); // Assuming API response structure has data.banks array
@@ -46,7 +66,7 @@ export default function GetBankDropdown() {
     };
 
     fetchBankData();
-  }, []);
+  }, [token]); // Dependency on the token state
 
   // Function to verify the account number and selected bank
   const verifyAccountDetails = async () => {
@@ -56,12 +76,11 @@ export default function GetBankDropdown() {
     }
 
     try {
-      const tokenFromStorage = localStorage.getItem('authToken');
       const response = await axios.get(
         `https://api.analogueshifts.com/api/tool/bank/resolve`, // Updated URL to be more readable
         {
           headers: {
-            "Authorization": `Bearer ${tokenFromStorage}`, // Use the token from storage
+            "Authorization": `Bearer ${token}`, // Use the extracted token
           },
           params: { // Use Axios `params` for query parameters
             account_number: accountNumber,
@@ -71,6 +90,8 @@ export default function GetBankDropdown() {
       );
 
       console.log("Verification response:", response); // Log the entire response object
+
+      // Axios automatically parses JSON, so we can directly use response.data
       const data = response.data;
       console.log("Verification data received:", data); // Log the parsed JSON data
       setAccountName(data.accountName); // Assuming API response has an accountName field
