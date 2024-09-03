@@ -4,11 +4,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios
 import img from "@/public/woman1.png";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 
 export default function GetBankDropdown() {
-  const router = useRouter(); // Initialize useRouter
-
   // State to store fetched bank data
   const [banks, setBanks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +15,7 @@ export default function GetBankDropdown() {
   const [accountName, setAccountName] = useState(''); // State to store verified account name
   const [token, setToken] = useState(''); // State to store the extracted token
 
-  // useEffect to extract token from URL when redirected to the app
+  // Extract token from URL when redirected to the app
   useEffect(() => {
     const extractTokenFromURL = () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -39,7 +36,7 @@ export default function GetBankDropdown() {
     }
   }, [token]);
 
-  // useEffect to fetch bank data when the token is available
+  // Fetch bank data when the token is available
   useEffect(() => {
     if (!token) return; // Only fetch if the token is available
 
