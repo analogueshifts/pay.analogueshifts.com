@@ -4,11 +4,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios
 import img from "@/public/woman1.png";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 
 export default function GetBankDropdown() {
-  const router = useRouter(); // Initialize useRouter
-
   // State to store fetched bank data
   const [banks, setBanks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,26 +15,35 @@ export default function GetBankDropdown() {
   const [accountName, setAccountName] = useState(''); // State to store verified account name
   const [token, setToken] = useState(''); // State to store the extracted token
 
-  // useEffect to extract token from URL when redirected to the app
+  // Fetch the token from the authentication service
   useEffect(() => {
-    const extractTokenFromURL = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const tokenFromURL = urlParams.get('token'); // Extract token from the URL parameter
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get("https://auth.analogueshifts.com/api/get-token", {
+          headers: {
+            // Include any required headers here
+            "Content-Type": "application/json"
+          }
+        });
 
-      if (tokenFromURL) {
-        setToken(tokenFromURL); // Store the token in state
-        localStorage.setItem('authToken', tokenFromURL); // Optionally store the token in localStorage for persistence
-      } else {
-        console.error("Token not found in the URL.");
-        setError("Token not found in the URL."); // Set error message in state
+        console.log("Auth response:", response); // Log the auth response
+
+        const tokenFromHeader = response.headers['authorization-token']; // Adjust this based on the actual header name
+        console.log("Extracted token:", tokenFromHeader);
+
+        if (tokenFromHeader) {
+          setToken(tokenFromHeader); // Store the token in state
+        } else {
+          throw new Error("Token not found in response headers.");
+        }
+      } catch (error) {
+        console.error("Error fetching token:", error);
+        setError(error.message); // Set error message in state
       }
     };
 
-    // Check if the token is not already set and the URL has the token parameter
-    if (!token) {
-      extractTokenFromURL();
-    }
-  }, [token]);
+    fetchToken();
+  }, []);
 
   // useEffect to fetch bank data when the token is available
   useEffect(() => {
