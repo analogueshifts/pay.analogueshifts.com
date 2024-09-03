@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios
 import img from "@/public/woman1.png";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'; // Import useRouter for redirection
+import { useRouter } from 'next/navigation';
 
 export default function GetBankDropdown() {
   const router = useRouter(); // Initialize useRouter
@@ -18,23 +18,24 @@ export default function GetBankDropdown() {
   const [accountName, setAccountName] = useState(''); // State to store verified account name
   const [token, setToken] = useState(''); // State to store the extracted token
 
-  // useEffect to handle redirection and extract token from URL
+  // useEffect to extract token from URL when redirected to the app
   useEffect(() => {
-    const checkAccountAndRedirect = async () => {
-      // Redirect to auth site for account check
-      window.location.href = "https://auth.analogueshifts.com"; // Replace this with the actual URL for account check
-    };
-
-    // If token is not already set and URL contains token parameter
-    if (!token) {
+    const extractTokenFromURL = () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const tokenFromURL = urlParams.get('token');
+      const tokenFromURL = urlParams.get('token'); // Extract token from the URL parameter
 
       if (tokenFromURL) {
         setToken(tokenFromURL); // Store the token in state
+        localStorage.setItem('authToken', tokenFromURL); // Optionally store the token in localStorage for persistence
       } else {
-        checkAccountAndRedirect(); // Redirect to check for an account
+        console.error("Token not found in the URL.");
+        setError("Token not found in the URL."); // Set error message in state
       }
+    };
+
+    // Check if the token is not already set and the URL has the token parameter
+    if (!token) {
+      extractTokenFromURL();
     }
   }, [token]);
 
