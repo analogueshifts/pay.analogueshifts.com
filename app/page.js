@@ -1,11 +1,61 @@
+"use client"; // Mark this component as a Client Component
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Image from "next/image";
 import Link from "next/link";
 import check from "@/public/Vector.png";
 import pay from "@/public/pay.png";
 import Landing from "@/public/landing.png";
 
-
 export default function Home() {
+  const [token, setToken] = useState(''); // State to store the extracted token
+  const [banks, setBanks] = useState([]); // Optional: if you need bank data on this page
+  const [error, setError] = useState(null); // State to handle errors
+
+  useEffect(() => {
+    // Function to extract token from the URL
+    const extractTokenFromURL = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenFromURL = urlParams.get('token'); // Extract token from the URL parameter
+
+      if (tokenFromURL) {
+        setToken(tokenFromURL); // Store the token in state
+        localStorage.setItem('authToken', tokenFromURL); // Optionally store in localStorage
+      } else {
+        console.error("Token not found in the URL.");
+        setError("Token not found in the URL."); // Set error message in state
+      }
+    };
+
+    extractTokenFromURL(); // Extract token on component mount
+  }, []);
+
+  useEffect(() => {
+    if (!token) return; // If no token, do nothing
+
+    // Optional: Fetch data that requires token after token is set
+    const fetchBankData = async () => {
+      try {
+        const response = await axios.get("https://api.analogueshifts.com/api/tool/bank/dropdown", {
+          headers: {
+            'Authorization': `Bearer ${token}`, // Use the extracted token
+          },
+        });
+
+        console.log("Bank dropdown response:", response); // Log the entire response object
+        const data = response.data;
+        console.log("Bank data received:", data); // Log the parsed JSON data
+        setBanks(data.data.banks); // Assuming API response structure has data.banks array
+      } catch (error) {
+        console.error("Error fetching bank data:", error);
+        setError(error.message); // Set error message in state
+      }
+    };
+
+    fetchBankData(); // Call the fetch function
+  }, [token]);
+
   const paymentOptions = [
     {
       title: "Card Payment",
@@ -47,6 +97,7 @@ export default function Home() {
 
   return (
     <main className="w-full bg-homeBackgroundColor">
+      {error && <p className="text-red-500">{error}</p>} {/* Display error if exists */}
       <div className="w-full flex min-h-[500px] bg-transparent flex-col items-center justify-center gap-5">
         <div>
           <Image src={Landing} alt="Check Mark" width={200} height={200} />
