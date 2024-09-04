@@ -1,4 +1,3 @@
-// Import the GetBankDropdown component from the components directory
 import GetBankDropdown from "./components/accountDetails";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,8 +5,7 @@ import img from "@/public/woman1.png";
 import dropdown from "@/resources/listOfBanks/dropdown.json";
 
 export default function Page() {
-  // Assuming dropdown.json contains an array of banks
-  const banks = dropdown.data.banks; // Update this line according to your actual JSON structure
+  const banks = dropdown.data.banks;
 
   return (
     <div className="mt-36">
@@ -27,9 +25,9 @@ export default function Page() {
               <option
                 className="text-black bg-[#FAE315] hover:bg-yellow-400"
                 key={index}
-                value={bank.code} // Assuming your JSON has `code` as the bank identifier
+                value={bank.code}
               >
-                {bank.name} {/* Adjust to match your JSON structure */}
+                {bank.name}
               </option>
             ))}
           </select>
