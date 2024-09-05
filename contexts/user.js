@@ -5,7 +5,14 @@ const UserContext = createContext();
 
 // Custom hook to use the UserContext
 export const useUser = () => {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+  
+  // Check if context is undefined, which could indicate that the provider is missing
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+
+  return context;
 };
 
 // Provider component to wrap your application
