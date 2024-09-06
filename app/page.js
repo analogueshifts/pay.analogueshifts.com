@@ -4,7 +4,6 @@ import check from "@/public/Vector.png";
 import pay from "@/public/pay.png";
 import Landing from "@/public/landing.png";
 
-
 export default function Home() {
   const paymentOptions = [
     {
@@ -129,14 +128,13 @@ export default function Home() {
               confirmation
             </p>
             <Link
-              href="/accountDetails" 
+              href="/accountDetails"
               className={`text-sm text-black tracking-wide bg-yellow-400 hover:bg-[#FAE315] hover:border-none font-semibold w-56 flex justify-center items-left rounded-lg h-11`}
             >
               <p className="items-center justify-center border-[#9CA3AF] mt-3 bg-transparent">
                 Proceed to make payment
               </p>
             </Link>
-            
           </div>
           <div className="col-span-2 mt-0">
             <Image src={pay} alt="pay" width={["600px"]} height={["600px"]} />

@@ -2,10 +2,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./footer";
 import NavBar from "@/components/application/navbar";
-import Head from "next/head";
-import Pay from "@/public/pay.png";
-import Logo from "@/public/logo.png";
-
+import { UserProvider } from "@/contexts/user";
+import { ToastProvider } from "@/contexts/toast";
+import ToastMessage from "@/components/application/toast-message";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -28,9 +27,14 @@ export default function RootLayout({ children }) {
         href="https://pay.analogueshifts.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.79a82f19.png&w=1080&q=75"
       />
       <body className={inter.className}>
-        <NavBar />
-        {children}
-        <Footer />
+        <UserProvider>
+          <ToastProvider>
+            <ToastMessage />
+            <NavBar />
+            {children}
+            <Footer />
+          </ToastProvider>
+        </UserProvider>
       </body>
     </html>
   );

@@ -1,11 +1,10 @@
-"use client"
 import { Suspense } from "react";
-import Home from "./components/validate";
+import Dashboard from "./components/validate";
 
 export default function Page() {
   return (
-    <Suspense fallback={<p></p>}>
-        <Home />
+    <Suspense fallback={<p>Loading...</p>}>
+      <Dashboard />
     </Suspense>
   );
 }

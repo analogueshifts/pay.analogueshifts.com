@@ -1,7 +1,7 @@
 "use client"; // Mark this component as a Client Component
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Import Axios
+import React, { useEffect, useState } from "react";
+import axios from "axios"; // Import Axios
 import img from "@/public/woman1.png";
 import Image from "next/image";
 
@@ -10,10 +10,10 @@ export default function GetBankDropdown() {
   const [banks, setBanks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // State to store error messages
-  const [accountNumber, setAccountNumber] = useState(''); // State to store account number input
-  const [selectedBank, setSelectedBank] = useState(''); // State to store selected bank code
-  const [accountName, setAccountName] = useState(''); // State to store verified account name
-  const [token, setToken] = useState(''); // State to store the extracted token
+  const [accountNumber, setAccountNumber] = useState(""); // State to store account number input
+  const [selectedBank, setSelectedBank] = useState(""); // State to store selected bank code
+  const [accountName, setAccountName] = useState(""); // State to store verified account name
+  const [token, setToken] = useState(""); // State to store the extracted token
 
   // Fetch the token from the authentication service
   useEffect(() => {
@@ -22,13 +22,13 @@ export default function GetBankDropdown() {
         const response = await axios.get("https://auth.analogueshifts.com", {
           headers: {
             // Include any required headers here
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         });
 
         console.log("Auth response:", response); // Log the auth response
 
-        const tokenFromHeader = response.headers['authorization-token']; // Adjust this based on the actual header name
+        const tokenFromHeader = response.headers["authorization-token"]; // Adjust this based on the actual header name
         console.log("Extracted token:", tokenFromHeader);
 
         if (tokenFromHeader) {
@@ -51,11 +51,14 @@ export default function GetBankDropdown() {
 
     const fetchBankData = async () => {
       try {
-        const response = await axios.get("https://api.analogueshifts.com/api/tool/bank/dropdown", {
-          headers: {
-            'Authorization': `Bearer ${token}`, // Use the extracted token
-          },
-        });
+        const response = await axios.get(
+          "https://api.analogueshifts.app/api/tool/bank/dropdown",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Use the extracted token
+            },
+          }
+        );
 
         console.log("Bank dropdown response:", response); // Log the entire response object
 
@@ -83,15 +86,16 @@ export default function GetBankDropdown() {
 
     try {
       const response = await axios.get(
-        `https://api.analogueshifts.com/api/tool/bank/resolve`, // Updated URL to be more readable
+        `https://api.analogueshifts.app/api/tool/bank/resolve`, // Updated URL to be more readable
         {
           headers: {
-            "Authorization": `Bearer ${token}`, // Use the extracted token
+            Authorization: `Bearer ${token}`, // Use the extracted token
           },
-          params: { // Use Axios `params` for query parameters
+          params: {
+            // Use Axios `params` for query parameters
             account_number: accountNumber,
-            bank_code: selectedBank
-          }
+            bank_code: selectedBank,
+          },
         }
       );
 
@@ -101,7 +105,6 @@ export default function GetBankDropdown() {
       const data = response.data;
       console.log("Verification data received:", data); // Log the parsed JSON data
       setAccountName(data.accountName); // Assuming API response has an accountName field
-
     } catch (error) {
       console.error("Error verifying account details:", error);
       setError(error.message); // Set error message in state
@@ -135,7 +138,9 @@ export default function GetBankDropdown() {
             Select your bank
           </option>
           {banks.map((bank, index) => (
-            <option key={index} value={bank.code}>{bank.name}</option> // Adjusting to correct bank code and name
+            <option key={index} value={bank.code}>
+              {bank.name}
+            </option> // Adjusting to correct bank code and name
           ))}
         </select>
         <button
