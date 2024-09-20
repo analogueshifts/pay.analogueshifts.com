@@ -1,11 +1,29 @@
+"use client"; // Ensure this is a Client Component
+
 import GetBankDropdown from "./components/accountDetails";
-import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react"; 
+import { useRouter } from "next/navigation"; // For client-side routing in Next.js App Router
 import img from "@/public/woman1.png";
 import dropdown from "@/resources/listOfBanks/dropdown.json";
 
 export default function Page() {
   const banks = dropdown.data.banks;
+  const router = useRouter(); // Ensure routing happens only on client
+
+  const [accountNumber, setAccountNumber] = useState(""); 
+  const [selectedBank, setSelectedBank] = useState("");
+  const [amount, setAmount] = useState(""); 
+
+  const handleContinue = () => {
+    if (!accountNumber || !selectedBank || !amount) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    // Navigate to the next page
+    router.push(`/accountverification?accountNumber=${accountNumber}&selectedBank=${selectedBank}&amount=${amount}`);
+  };
 
   return (
     <div className="mt-36">
@@ -16,29 +34,38 @@ export default function Page() {
             type="number"
             className="h-14 rounded-lg col-span-3 bg-transparent border w-full"
             placeholder="Input your 10-digit account number"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
           />
-          <select className="h-14 bg-transparent border w-full rounded-lg text-white">
-            <option disabled selected>
+          <select
+            className="h-14 bg-transparent border w-full rounded-lg text-white"
+            value={selectedBank}
+            onChange={(e) => setSelectedBank(e.target.value)}
+          >
+            <option disabled selected value="">
               Select your bank
             </option>
             {banks.map((bank, index) => (
-              <option
-                className="text-black bg-[#FAE315] hover:bg-yellow-400"
-                key={index}
-                value={bank.code}
-              >
+              <option className="bg-yellow-500" key={index} value={bank.code}>
                 {bank.name}
               </option>
             ))}
           </select>
-          <Link
-            href="/accountDetails/page"
-            className={`text-sm text-black mt-4 tracking-wide bg-yellow-400 hover:bg-[#FAE315] hover:border-none font-semibold w-56 flex justify-center items-left rounded-lg h-11`}
+
+          <input
+            type="number"
+            className="h-14 mt-4 rounded-lg col-span-3 bg-transparent border w-full"
+            placeholder="Input amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+
+          <button
+            onClick={handleContinue}
+            className="text-sm text-black mt-4 tracking-wide bg-yellow-400 hover:bg-[#FAE315] hover:border-none font-semibold w-56 flex justify-center items-left rounded-lg h-11"
           >
-            <p className="items-center font-bold capitalize justify-center border-[#9CA3AF] mt-3 bg-transparent">
-              continue
-            </p>
-          </Link>
+            Continue
+          </button>
         </div>
         <div className="col-span-2">
           <Image className="flex justify-end" src={img} alt="picture" />
