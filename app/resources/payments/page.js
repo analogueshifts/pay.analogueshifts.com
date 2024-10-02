@@ -13,7 +13,7 @@ export default function NavigationPage() {
           />
         </p>
         <p className="font-bold text-2xl col-span-7 flex justify-items-stretch text-yellow-400">
-          <Link href="/resources/payments/createPayments/Page">
+          <Link href="/createPayments">
             <a>Create Payment</a>
           </Link>
         </p>
@@ -28,7 +28,7 @@ export default function NavigationPage() {
           />
         </p>
         <p className="font-bold text-2xl col-span-7 flex justify-items-stretch text-yellow-400">
-          <Link href="/dashboard/resources/payments/makePayments">
+          <Link href="/resources/payments/makePayments">
             <a>Pay a Biller</a>
           </Link>
         </p>
@@ -43,7 +43,7 @@ export default function NavigationPage() {
           />
         </p>
         <p className="font-bold text-2xl col-span-7 flex justify-items-stretch text-yellow-400">
-          <Link href="/dashboard/resources/payments/listOfPayments">
+          <Link href="/listOfPayments">
             <a>View Existing Payments</a>
           </Link>
         </p>

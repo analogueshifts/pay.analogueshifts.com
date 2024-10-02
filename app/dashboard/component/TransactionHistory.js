@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import NavigationPage from '../resources/payments/page';
+import NavigationPage from '@/app/resources/payments/page';
 
 export default function UserDashboard() {
   const [balanceVisible, setBalanceVisible] = useState(false); // Balance visibility

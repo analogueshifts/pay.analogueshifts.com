@@ -13,55 +13,19 @@ export default function PaymentDetails() {
     validity_period: '2024-09-18',
   };
 
-  // Get Bearer token from the cookie
-  const getBearerToken = () => {
-    const cookieValue = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('analogueshifts='))
-      ?.split('=')[1];
-    return cookieValue || '';
+  // Handle End Payment (dummy function)
+  const handleEndPayment = () => {
+    alert('Payment ended successfully!');
   };
 
-  // Handle End Payment (DELETE request)
-  const handleEndPayment = async () => {
-    const token = getBearerToken();
-
-    const response = await fetch('https://api.analogueshifts.com/api/tool/pay/9d312d2a-5738-33d2-9b10-72ccc46ab58c', {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      alert('Payment ended successfully!');
-    } else {
-      const error = await response.json();
-      alert('Error ending payment: ' + error.message);
-    }
-  };
-
-  // Redirect to payment page
+  // Redirect to payment page (dummy function)
   const proceedToPay = () => {
-    // Replace the URL with your actual payment page link
-    router.push('@/components/resources/payments/makePayment');
+    alert('Redirecting to the payment page...');
   };
 
-  // Redirect to edit page with query parameters
+  // Redirect to edit page with query parameters (dummy function)
   const editPayment = () => {
-    router.push({
-      pathname: '@/components/resources/payments/createPayment',
-      query: {
-        title: paymentDetails.title,
-        description: paymentDetails.description,
-        amount: paymentDetails.amount,
-        min_amount: paymentDetails.min_amount,
-        max_amount: paymentDetails.max_amount,
-        limit: paymentDetails.limit,
-        validity_period: paymentDetails.validity_period,
-      },
-    });
+    alert('Redirecting to the edit payment page...');
   };
 
   return (
