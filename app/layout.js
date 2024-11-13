@@ -1,11 +1,13 @@
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Footer from "./footer";
-import NavBar from "@/components/application/navbar";
 import { UserProvider } from "@/contexts/user";
 import { ToastProvider } from "@/contexts/toast";
 import ToastMessage from "@/components/application/toast-message";
-const inter = Inter({ subsets: ["latin"] });
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "AnalogueShifts Payment Gateway",
@@ -26,13 +28,11 @@ export default function RootLayout({ children }) {
         type="image/x-icon"
         href="https://pay.analogueshifts.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.79a82f19.png&w=1080&q=75"
       />
-      <body className={inter.className}>
+      <body className={plusJakartaSans.className}>
         <UserProvider>
           <ToastProvider>
             <ToastMessage />
-            <NavBar />
             {children}
-            <Footer />
           </ToastProvider>
         </UserProvider>
       </body>

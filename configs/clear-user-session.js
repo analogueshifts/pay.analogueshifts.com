@@ -1,13 +1,10 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export const clearUserSession = () => {
   // Remove any session-related cookies
-  Cookies.remove('analogueshifts'); // Example token cookie
+  Cookies.remove("analogueshifts"); // Example token cookie
 
   // Optionally, clear localStorage/sessionStorage
   localStorage.clear();
   sessionStorage.clear();
-
-  // Any additional cleanup can be added here
-  console.log('User session cleared.');
 };
