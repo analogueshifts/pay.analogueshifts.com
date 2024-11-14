@@ -133,5 +133,49 @@ export const useBanks = () => {
     }
   };
 
-  return { getBanks, validateAccount, addBank };
+  const withdrawFunds = async ({
+    setLoading,
+    account_uuid,
+    amount,
+    password,
+  }) => {
+    setLoading(true);
+    try {
+      const response = await axios.request({
+        url: "/tool/bank/withdraw/request/" + account_uuid,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+        data: {
+          amount,
+          password,
+        },
+      });
+      setLoading(false);
+      if (response?.data?.success) {
+        notifyUser("success", "Withdrawal placed successfuly", "right");
+        router.push("/wallet");
+      } else {
+        notifyUser("error", response?.data?.message, "right");
+      }
+    } catch (error) {
+      setLoading(false);
+      notifyUser(
+        "error",
+        error?.response?.data?.message ||
+          error?.response?.data?.data?.message ||
+          error?.message ||
+          "Something went wrong",
+        "right"
+      );
+      if (error?.response?.status === 401) {
+        clearUserSession();
+      }
+    }
+  };
+
+  return { getBanks, validateAccount, addBank, withdrawFunds };
 };

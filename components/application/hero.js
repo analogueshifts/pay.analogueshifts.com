@@ -99,7 +99,7 @@ export default function Hero() {
         transition={{ ease: "linear", duration: 2 }}
         src={"/landing.png"}
         alt=""
-        className="w-[45%] h-max tablet:w-max"
+        className="w-[45%] h-max tablet:w-max tablet:max-w-full"
       />
     </div>
   );
