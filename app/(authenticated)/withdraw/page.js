@@ -8,8 +8,8 @@ export default function Page() {
           Withdraw funds
         </h2>
         <p className="large:leading-[64px] text-sm mt-2 large:mt-0 font-normal large:text-lg text-neutral200 mb-6">
-          Withdraw money to your account. Don't have an account? go to Add Bank
-          now to add one.
+          Withdraw money to your account. Don&lsquo;t have an account? go to Add
+          Bank now to add one.
         </p>
         <Form />
       </div>
