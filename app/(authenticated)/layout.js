@@ -19,13 +19,11 @@ export default function UserLayout({ children }) {
   const token = Cookies.get("analogueshifts");
 
   useEffect(() => {
-    // Redirect To Login if User is not Authenticated
     if (!user && !token) {
       Cookies.set("RedirectionLink", pathname);
       window.location.href = "https://auth.analogueshifts.app?app=pay";
       return null;
     } else if (!user && token) {
-      //    Fetch User
       getUser({ setLoading, layout: "authenticated" });
     }
   }, []);
