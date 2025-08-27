@@ -10,6 +10,10 @@ import { useRouter } from "next/navigation";
 export default function Hero() {
   const { user } = useUser();
   const router = useRouter();
+
+  const authLink = process.env.NEXT_PUBLIC_AUTH_URL;
+  const app = process.env.NEXT_PUBLIC_SITE_BUILD_UUID;
+
   return (
     <div className="w-full large:pt-[138px] pb-10 pt-[78px] bg-white tablet:flex-col-reverse flex-row justify-between px-[112px] tablet:px-6 gap-[51px]  h-max items-center flex">
       <div className="w-max max-w-[calc(55%-51px)] tablet:max-w-full flex flex-col gap-6">
@@ -79,9 +83,7 @@ export default function Hero() {
               animate={{ y: "0%" }}
               transition={{ ease: "linear", duration: 0.5 }}
               onClick={() =>
-                router.push(
-                  user ? "/wallet" : "https://auth.analogueshifts.app?app=pay"
-                )
+                router.push(user ? "/wallet" : `${authLink}?app=${app}`)
               }
               type="button"
               className="min-w-max hover-text-button flex justify-center items-center large:px-16 px-12 tablet:px-6 h-14 rounded-2xl bg-tremor-background-darkYellow text-[#FEFEFE] large:text-xl tablet:text-sm text-lg font-medium"
